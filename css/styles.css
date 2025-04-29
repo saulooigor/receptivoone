@@ -1,0 +1,223 @@
+/* Estilos gerais */
+:root {
+    --primary-color: #2e86de;
+    --secondary-color: #ff6b6b;
+    --dark-color: #2c3e50;
+    --light-color: #f5f6fa;
+    --gray-color: #dcdde1;
+    --text-color: #333333;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+  }
+  
+  /* Estilos do Header */
+  .header-video {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .video-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .header-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .logo {
+    max-width: 200px;
+    margin-bottom: 30px;
+  }
+  
+  /* Estilos dos cards de pacotes */
+  .pacote-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    box-shadow: var(--shadow);
+  }
+  
+  .pacote-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .pacote-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Estilos da seção de detalhes do pacote */
+  #pacote-mapa {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  #pacote-carousel {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  
+  .carousel-item img {
+    height: 350px;
+    object-fit: cover;
+  }
+  
+  /* Botão de WhatsApp */
+  .whatsapp-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.3s;
+  }
+  
+  .whatsapp-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .whatsapp-button i {
+    font-size: 30px;
+  }
+  
+  .whatsapp-button a {
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Animações */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  .animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Estilos para mobile */
+  @media (max-width: 768px) {
+    .header-content h1 {
+      font-size: 2.5rem;
+    }
+    
+    .logo {
+      max-width: 150px;
+    }
+    
+    .carousel-item img {
+      height: 250px;
+    }
+    
+    #pacote-mapa {
+      height: 200px;
+    }
+    
+    .whatsapp-button {
+      width: 50px;
+      height: 50px;
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    .whatsapp-button i {
+      font-size: 24px;
+    }
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--dark-color);
+  }
+  
+  .social-icons a, .pagamento-icons i {
+    margin-right: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .social-icons a:hover, .pagamento-icons i:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Botões */
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: #1c7ed6;
+    border-color: #1c7ed6;
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+  }
+  
+  #reservar-btn {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+  
+  #reservar-btn:hover {
+    background-color: #ff5252;
+    border-color: #ff5252;
+  }

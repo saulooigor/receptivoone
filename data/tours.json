@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "nome": "Passeio às Praias",
+      "descricao": "Conheça as mais belas praias da região com nosso roteiro exclusivo. Visite cinco praias paradisíacas, com tempo para banho de mar e fotos em cada uma delas. Passeio ideal para famílias e amantes da natureza.",
+      "imagens": ["praia1.jpg", "praia2.jpg", "praia3.jpg"],
+      "videos": ["praia-tour.mp4"],
+      "localizacao": {
+        "lat": -23.123456,
+        "lng": -43.654321,
+        "endereco": "Praias do Litoral Norte"
+      },
+      "incluso": [
+        {"item": "Transporte em van climatizada", "valor": "Incluso"},
+        {"item": "Guia bilíngue (português/inglês)", "valor": "Incluso"},
+        {"item": "Água mineral", "valor": "Incluso"},
+        {"item": "Almoço em restaurante à beira-mar", "valor": "R$ 45,00"},
+        {"item": "Equipamentos para snorkeling", "valor": "R$ 30,00"}
+      ],
+      "valorBase": "R$ 120,00"
+    },
+    {
+      "id": 2,
+      "nome": "City Tour Histórico",
+      "descricao": "Um passeio completo pelo centro histórico da cidade, conhecendo os principais pontos turísticos, monumentos e a rica história local. Incluindo visitas guiadas aos museus e prédios históricos.",
+      "imagens": ["cidade1.jpg", "cidade2.jpg", "cidade3.jpg"],
+      "videos": ["city-tour.mp4"],
+      "localizacao": {
+        "lat": -23.543211,
+        "lng": -43.765432,
+        "endereco": "Centro Histórico"
+      },
+      "incluso": [
+        {"item": "Transporte em van climatizada", "valor": "Incluso"},
+        {"item": "Guia especializado em história", "valor": "Incluso"},
+        {"item": "Ingressos para museus", "valor": "Incluso"},
+        {"item": "Almoço em restaurante típico", "valor": "R$ 50,00"},
+        {"item": "Souvenirs personalizados", "valor": "R$ 25,00"}
+      ],
+      "valorBase": "R$ 95,00"
+    },
+    {
+      "id": 3,
+      "nome": "Aventura na Cachoeira",
+      "descricao": "Uma experiência emocionante em meio à natureza, com trilhas, banhos de cachoeira e tirolesa. Para os amantes de aventura e ecoturismo, este passeio oferece adrenalina e contato com a natureza.",
+      "imagens": ["cachoeira1.jpg", "cachoeira2.jpg", "cachoeira3.jpg"],
+      "videos": ["adventure-tour.mp4"],
+      "localizacao": {
+        "lat": -23.987654,
+        "lng": -43.123456,
+        "endereco": "Parque Ecológico das Cachoeiras"
+      },
+      "incluso": [
+        {"item": "Transporte em veículo 4x4", "valor": "Incluso"},
+        {"item": "Guia especializado em ecoturismo", "valor": "Incluso"},
+        {"item": "Equipamentos de segurança", "valor": "Incluso"},
+        {"item": "Lanche de trilha", "valor": "Incluso"},
+        {"item": "Almoço em restaurante local", "valor": "R$ 40,00"},
+        {"item": "Sessão de fotos profissionais", "valor": "R$ 60,00"}
+      ],
+      "valorBase": "R$ 150,00"
+    }
+  ]
