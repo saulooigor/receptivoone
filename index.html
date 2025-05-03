@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Meta tags para SEO -->
-    <title>Receptivo Turístico | Conheça os Melhores Passeios e Serviços de Turismo</title>
-    <meta name="description" content="Desfrute dos melhores passeios turísticos com nossa empresa de receptivo. Transporte, passeios guiados e serviços de qualidade para suas férias perfeitas.">
-    <meta name="keywords" content="receptivo turístico, passeios, serviços turísticos, transporte turístico, férias">
+    <title>Receptivo Turístico | Experiências Inesquecíveis em Passeios e Turismo</title>
+    <meta name="description" content="Experimente os melhores passeios turísticos com nossa empresa de receptivo. Aventuras, paisagens deslumbrantes e serviços premium para suas férias inesquecíveis.">
+    <meta name="keywords" content="receptivo turístico, passeios, aventuras, serviços turísticos, transporte turístico, férias, turismo, destinos, praias, cachoeiras, city tour">
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
@@ -15,17 +15,26 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Google Fonts - Baloo 2 -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS - Animate On Scroll Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <!-- Header com vídeo de background -->
     <header class="header-video">
         <div class="video-container">
-            <video autoplay muted loop id="header-video">
+            <video autoplay muted loop playsinline id="header-video">
                 <source src="assets/videos/header-background.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
@@ -33,9 +42,9 @@
         <div class="header-content">
             <div class="container text-center">
                 <img src="assets/images/logo.png" alt="Logo da Empresa de Receptivo Turístico" class="logo">
-                <h1>Descubra Experiências Incríveis</h1>
-                <p class="lead">Passeios exclusivos, transporte de qualidade e os melhores serviços turísticos para suas férias inesquecíveis</p>
-                <button id="header-cta" class="btn btn-primary btn-lg">Conhecer Nossos Passeios</button>
+                <h1 data-aos="fade-up" data-aos-delay="200">Viva Experiências Inesquecíveis!</h1>
+                <p class="lead" data-aos="fade-up" data-aos-delay="400">Passeios exclusivos, transporte de qualidade e aventuras para tornar suas férias simplesmente extraordinárias</p>
+                <button id="header-cta" class="btn btn-primary btn-lg" data-aos="zoom-in" data-aos-delay="600">Descubra Nossos Passeios</button>
             </div>
         </div>
     </header>
@@ -43,21 +52,9 @@
     <!-- Seção de pacotes/serviços -->
     <section id="pacotes" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Nossos Passeios e Serviços</h2>
+            <h2 class="text-center mb-5" data-aos="fade-up">Aventuras Que Esperam Por Você</h2>
             <div class="row" id="pacotes-container">
                 <!-- Os cards dos pacotes serão carregados dinamicamente aqui via JavaScript -->
-                <!-- Exemplo de estrutura de card:
-                <div class="col-md-4 mb-4">
-                    <div class="card pacote-card">
-                        <img src="assets/images/passeio1.jpg" class="card-img-top" alt="Passeio às Praias">
-                        <div class="card-body">
-                            <h5 class="card-title">Passeio às Praias</h5>
-                            <p class="card-text">Conheça as mais belas praias da região com nosso roteiro exclusivo.</p>
-                            <button class="btn btn-outline-primary ver-pacote" data-id="1">Ver Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-                -->
             </div>
         </div>
     </section>
@@ -65,13 +62,13 @@
     <!-- Seção de detalhe do pacote selecionado -->
     <section id="detalhe-pacote" class="py-5 d-none">
         <div class="container">
-            <button id="voltar-pacotes" class="btn btn-outline-secondary mb-4">
+            <button id="voltar-pacotes" class="btn mb-4">
                 <i class="fas fa-arrow-left"></i> Voltar para passeios
             </button>
-            
+
             <div class="row">
-                <!-- Carrossel de imagens -->
-                <div class="col-lg-6 mb-4">
+                <!-- Carrossel de imagens mantido no lado esquerdo -->
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
                     <div id="pacote-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" id="carousel-inner-container">
                             <!-- Imagens carregadas dinamicamente -->
@@ -86,32 +83,54 @@
                         </button>
                     </div>
                 </div>
-                
-                <!-- Informações do pacote -->
-                <div class="col-lg-6">
-                    <h3 id="pacote-titulo">Nome do Passeio</h3>
-                    <p id="pacote-descricao">Descrição do passeio...</p>
-                    
-                    <!-- Mapa do Google -->
-                    <div class="mb-4">
-                        <h4>Localização</h4>
-                        <div id="pacote-mapa" style="height: 250px"></div>
+
+                <!-- Coluna direita reorganizada em blocos com classes específicas -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <!-- Bloco de informações básicas -->
+                    <div class="pacote-info">
+                        <h3 id="pacote-titulo">Nome do Passeio</h3>
+                        <p id="pacote-descricao">Descrição do passeio...</p>
                     </div>
-                    
-                    <!-- Detalhes do pacote -->
-                    <div class="mb-4">
+
+                    <!-- Bloco do mapa -->
+                    <div class="pacote-mapa-section">
+                        <div class="map-section-title">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h4>Localização do Passeio</h4>
+                        </div>
+                        <div id="pacote-mapa" class="map-pulse">
+                            <!-- Elemento decorativo -->
+                            <div class="map-decorative-pin">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <!-- O iframe será inserido aqui via JavaScript -->
+                            <div class="map-loading-indicator">
+                                <i class="fas fa-map-marked-alt fa-spin"></i>
+                                <p>Carregando mapa interativo...</p>
+                            </div>
+                        </div>
+                        <p class="text-center small text-muted">
+                            <i class="fas fa-info-circle me-1"></i> Clique no mapa para ver detalhes e rotas
+                        </p>
+                    </div>
+
+                    <!-- Bloco do que está incluso -->
+                    <div class="pacote-incluso">
                         <h4>O que está incluso</h4>
                         <ul id="pacote-itens" class="list-group">
                             <!-- Itens carregados dinamicamente -->
                         </ul>
                     </div>
-                    
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <div class="pacote-valor">
-                            <h5>Valor a partir de:</h5>
-                            <p id="pacote-valor" class="fs-4">R$ 0,00</p>
+
+                    <!-- Bloco do valor e reserva -->
+                    <div class="pacote-valor-section">
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <div class="pacote-valor">
+                                <h5>Valor a partir de:</h5>
+                                <p id="pacote-valor" class="fs-4">R$ 0,00</p>
+                            </div>
+                            <a href="#" id="reservar-btn" class="btn btn-lg">Reservar Agora</a>
                         </div>
-                        <a href="#" id="reservar-btn" class="btn btn-primary btn-lg">Reservar Agora</a>
                     </div>
                 </div>
             </div>
@@ -119,20 +138,20 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="py-4">
         <div class="container">
             <div class="row">
                 <!-- Informações da empresa -->
-                <div class="col-md-4 mb-4 mb-md-0">
+                <div class="col-md-4 mb-4 mb-md-0" data-aos="fade-right">
                     <h5>Empresa de Receptivo</h5>
-                    <p>Oferecendo as melhores experiências turísticas desde 2010.</p>
+                    <p>Criando memórias inesquecíveis desde 2010.</p>
                     <p><i class="fas fa-map-marker-alt me-2"></i> Rua Exemplo, 123 - Cidade/UF</p>
                     <p><i class="fas fa-phone me-2"></i> (00) 00000-0000</p>
                     <p><i class="fas fa-envelope me-2"></i> contato@receptivo.com.br</p>
                 </div>
                 
                 <!-- Links rápidos -->
-                <div class="col-md-4 mb-4 mb-md-0">
+                <div class="col-md-4 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="100">
                     <h5>Links Rápidos</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white">Sobre Nós</a></li>
@@ -143,7 +162,7 @@
                 </div>
                 
                 <!-- Formas de pagamento -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-left" data-aos-delay="200">
                     <h5>Formas de Pagamento</h5>
                     <div class="pagamento-icons">
                         <i class="fab fa-cc-visa fa-2x me-2"></i>
@@ -179,11 +198,20 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API&callback=initMaps" async defer></script>
+    <!-- AOS - Animate On Scroll Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <!-- JavaScript Personalizado -->
     <script src="js/tours.js"></script>
     <script src="js/main.js"></script>
+    
+    <!-- Inicializar AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>

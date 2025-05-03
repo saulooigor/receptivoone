@@ -1,4 +1,4 @@
-// tours.js - Gerenciamento dos pacotes turísticos
+// tours.js - Gerenciamento dos pacotes turísticos com maior dinamicidade
 
 // Variável para armazenar os dados dos pacotes
 let toursData = [];
@@ -10,7 +10,7 @@ async function loadTours() {
         const response = await fetch('data/tours.json');
         toursData = await response.json();
         
-        // Renderiza os cards na página
+        // Renderiza os cards na página com animação sequencial
         renderTourCards();
         
         // Configura os eventos para os botões de visualização de detalhes
@@ -26,27 +26,37 @@ async function loadTours() {
     }
 }
 
-// Função para renderizar os cards dos pacotes
+// Função para renderizar os cards dos pacotes com efeitos
 function renderTourCards() {
     const container = document.getElementById('pacotes-container');
     
     // Limpa o container
     container.innerHTML = '';
     
-    // Cria os cards para cada pacote
-    toursData.forEach(tour => {
+    // Cria os cards para cada pacote com delay para efeito sequencial
+    toursData.forEach((tour, index) => {
         const card = document.createElement('div');
-        card.className = 'col-md-4 mb-4 animate-on-scroll';
+        card.className = 'col-md-4 mb-4';
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', (index * 200).toString());
+        
+        // Gera uma cor de borda dinâmica para cada card
+        const borderColors = ['#fc8c04', '#5c0404', '#5094ac', '#bcaa84'];
+        const borderColor = borderColors[index % borderColors.length];
         
         card.innerHTML = `
-            <div class="card pacote-card">
-                <img src="assets/images/${tour.imagens[0]}" class="card-img-top" alt="${tour.nome}">
+            <div class="card pacote-card" style="border-top: 4px solid ${borderColor}">
+                <div class="overflow-hidden">
+                    <img src="assets/images/${tour.imagens[0]}" class="card-img-top" alt="${tour.nome}">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">${tour.nome}</h5>
                     <p class="card-text">${tour.descricao.substring(0, 100)}...</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-primary">A partir de ${tour.valorBase}</span>
-                        <button class="btn btn-outline-primary ver-pacote" data-id="${tour.id}">Ver Detalhes</button>
+                        <span class="text-primary">A partir de <strong>${tour.valorBase}</strong></span>
+                        <button class="btn btn-outline-primary ver-pacote" data-id="${tour.id}">
+                            <i class="fas fa-camera-retro me-2"></i>Ver Detalhes
+                        </button>
                     </div>
                 </div>
             </div>
@@ -54,6 +64,34 @@ function renderTourCards() {
         
         container.appendChild(card);
     });
+    
+    // Adiciona efeito de escalonamento nos cards quando o mouse passa por cima
+    const cards = document.querySelectorAll('.pacote-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) rotate(2deg)';
+            this.style.boxShadow = '0 20px 30px rgba(0, 0, 0, 0.2)';
+            this.querySelector('img').style.transform = 'scale(1.1)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+            this.querySelector('img').style.transform = '';
+        });
+    });
+    
+    // Adiciona pequena animação aleatória para cada card
+    setTimeout(() => {
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animate__animated', 'animate__pulse');
+                setTimeout(() => {
+                    card.classList.remove('animate__animated', 'animate__pulse');
+                }, 1000);
+            }, index * 2000);
+        });
+    }, 3000);
 }
 
 // Configurar eventos para os botões de visualização de detalhes
@@ -67,19 +105,45 @@ function setupTourEvents() {
     });
     
     // Botão para voltar à lista de pacotes
-    document.getElementById('voltar-pacotes').addEventListener('click', function() {
-        document.getElementById('pacotes').classList.remove('d-none');
-        document.getElementById('detalhe-pacote').classList.add('d-none');
-    });
+    const voltarBtn = document.getElementById('voltar-pacotes');
+    if (voltarBtn) {
+        voltarBtn.addEventListener('click', function() {
+            // Efeito de transição suave
+            document.getElementById('detalhe-pacote').style.opacity = 0;
+            
+            setTimeout(() => {
+                document.getElementById('pacotes').classList.remove('d-none');
+                document.getElementById('detalhe-pacote').classList.add('d-none');
+                
+                // Anima a entrada da seção de pacotes
+                document.getElementById('pacotes').style.opacity = 0;
+                document.getElementById('pacotes').style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    document.getElementById('pacotes').style.opacity = 1;
+                    document.getElementById('pacotes').style.transform = 'translateY(0)';
+                }, 100);
+                
+            }, 300);
+        });
+    }
     
     // Botão para reservar
-    document.getElementById('reservar-btn').addEventListener('click', function() {
-        const pacoteNome = document.getElementById('pacote-titulo').textContent;
-        const mensagem = `Olá! Estou interessado no pacote "${pacoteNome}". Gostaria de mais informações e disponibilidade.`;
-        const phoneNumber = '5500000000000'; // Substitua pelo número real da empresa
-        
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensagem)}`, '_blank');
-    });
+    const reservarBtn = document.getElementById('reservar-btn');
+    if (reservarBtn) {
+        reservarBtn.addEventListener('click', function() {
+            const pacoteNome = document.getElementById('pacote-titulo').textContent;
+            const mensagem = `Olá! Estou interessado no pacote "${pacoteNome}". Gostaria de mais informações e disponibilidade.`;
+            const phoneNumber = '5500000000000'; // Substitua pelo número real da empresa
+            
+            // Efeito de clique
+            this.classList.add('animate__animated', 'animate__rubberBand');
+            setTimeout(() => {
+                this.classList.remove('animate__animated', 'animate__rubberBand');
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensagem)}`, '_blank');
+            }, 800);
+        });
+    }
 }
 
 // Função para exibir os detalhes de um pacote específico
@@ -114,7 +178,7 @@ function showTourDetails(tourId) {
             const item = document.createElement('div');
             item.className = 'carousel-item';
             item.innerHTML = `
-                <video class="d-block w-100" controls>
+                <video class="d-block w-100" controls autoplay muted loop>
                     <source src="assets/videos/${video}" type="video/mp4">
                     Seu navegador não suporta vídeos HTML5.
                 </video>
@@ -123,56 +187,209 @@ function showTourDetails(tourId) {
         });
     }
     
-    // Atualiza a lista de itens inclusos
+    // Atualiza a lista de itens inclusos com animação
     const itensList = document.getElementById('pacote-itens');
     itensList.innerHTML = '';
     
-    tour.incluso.forEach(item => {
+    tour.incluso.forEach((item, index) => {
         const li = document.createElement('li');
         li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        li.style.opacity = '0';
+        li.style.transform = 'translateX(20px)';
+        li.style.transition = 'all 0.3s ease';
+        li.style.transitionDelay = `${index * 100}ms`;
+        
         li.innerHTML = `
             ${item.item}
             <span class="badge ${item.valor === 'Incluso' ? 'bg-success' : 'bg-primary'} rounded-pill">${item.valor}</span>
         `;
         itensList.appendChild(li);
+        
+        // Força o reflow para a animação funcionar
+        setTimeout(() => {
+            li.style.opacity = '1';
+            li.style.transform = 'translateX(0)';
+        }, 10);
     });
     
-    // Inicializa o mapa
-    initMap(tour.localizacao);
+    // Atualiza o iframe do mapa com a localização específica do passeio
+    updateMapIframe(tour.localizacao);
     
-    // Exibe a seção de detalhes e oculta a lista de pacotes
-    document.getElementById('pacotes').classList.add('d-none');
-    document.getElementById('detalhe-pacote').classList.remove('d-none');
+    // Aplica classes adicionais para o layout responsivo
+    applyResponsiveLayout();
     
-    // Scroll para o topo da seção de detalhes
-    document.getElementById('detalhe-pacote').scrollIntoView({ behavior: 'smooth' });
+    // Esconde a seção de pacotes com fade out
+    document.getElementById('pacotes').style.opacity = 0;
+    document.getElementById('pacotes').style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        // Exibe a seção de detalhes e oculta a lista de pacotes
+        document.getElementById('pacotes').classList.add('d-none');
+        document.getElementById('detalhe-pacote').classList.remove('d-none');
+        
+        // Mostra a seção de detalhes com fade in
+        document.getElementById('detalhe-pacote').style.opacity = 0;
+        document.getElementById('detalhe-pacote').style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            document.getElementById('detalhe-pacote').style.opacity = 1;
+            document.getElementById('detalhe-pacote').style.transform = 'translateY(0)';
+            
+            // Inicia o carrossel
+            const carousel = new bootstrap.Carousel(document.getElementById('pacote-carousel'), {
+                interval: 3000,
+                touch: true
+            });
+        }, 100);
+        
+    }, 300);
 }
 
-// Função para inicializar o mapa
-function initMap(localizacao) {
-    // Verifica se a API do Google Maps está carregada
-    if (typeof google === 'undefined') {
-        console.error('Google Maps API não está carregada.');
-        return;
+// Nova função para aplicar layouts responsivos adicionais
+function applyResponsiveLayout() {
+    // Verifica o tamanho da tela
+    const isLargeScreen = window.innerWidth >= 992;
+    
+    // Para telas grandes, aplicamos o layout grid
+    if (isLargeScreen) {
+        // Garantir que as classes de grid estejam aplicadas corretamente
+        const detailContainer = document.querySelector('#detalhe-pacote .container');
+        if (detailContainer) {
+            detailContainer.classList.add('large-screen-layout');
+        }
     }
     
-    const mapElement = document.getElementById('pacote-mapa');
-    const mapOptions = {
-        center: { lat: localizacao.lat, lng: localizacao.lng },
-        zoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    // Ajusta altura do carrossel em telas grandes
+    adjustCarouselHeight();
     
-    const map = new google.maps.Map(mapElement, mapOptions);
+    // Adiciona listener para ajustar quando a janela for redimensionada
+    window.addEventListener('resize', adjustCarouselHeight);
+}
+
+// Função para ajustar altura do carrossel
+function adjustCarouselHeight() {
+    const carousel = document.getElementById('pacote-carousel');
+    if (!carousel) return;
     
-    // Adiciona um marcador na localização
-    new google.maps.Marker({
-        position: { lat: localizacao.lat, lng: localizacao.lng },
-        map: map,
-        title: localizacao.endereco
+    const isLargeScreen = window.innerWidth >= 992;
+    
+    if (isLargeScreen) {
+        // Calcula altura baseada na altura da coluna de informações
+        const infoColumn = document.querySelector('.pacote-info');
+        const mapSection = document.querySelector('.pacote-mapa-section');
+        
+        if (infoColumn && mapSection) {
+            // Obtém altura combinada para determinar a altura do carrossel
+            const combinedHeight = infoColumn.offsetHeight + mapSection.offsetHeight + 30; // 30px para o gap
+            
+            // Aplica altura mínima - não menos que 500px
+            const carouselHeight = Math.max(combinedHeight, 500); 
+            
+            // Aplica ao carrossel e seus elementos internos
+            const carouselInner = carousel.querySelector('.carousel-inner');
+            if (carouselInner) {
+                carouselInner.style.height = `${carouselHeight}px`;
+            }
+        }
+    } else {
+        // Em telas menores, remove altura fixa
+        const carouselInner = carousel.querySelector('.carousel-inner');
+        if (carouselInner) {
+            carouselInner.style.height = '';
+        }
+    }
+}
+
+// Função para atualizar o iframe do Google Maps
+function updateMapIframe(localizacao) {
+    const mapContainer = document.getElementById('pacote-mapa');
+    if (mapContainer) {
+        // Define uma URL com as coordenadas para um iframe do Google Maps
+        // Coordenadas podem ser usadas diretamente em uma URL do Google Maps
+        const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${localizacao.lng}!3d${localizacao.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDA3JzM0LjQiUyA0M8KwMzknMTUuNiJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr`;
+        
+        // Cria o iframe com animação
+        mapContainer.innerHTML = '';
+        
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'map-loading-indicator';
+        loadingIndicator.innerHTML = '<i class="fas fa-map-marked-alt fa-spin"></i><p>Carregando mapa...</p>';
+        mapContainer.appendChild(loadingIndicator);
+        
+        setTimeout(() => {
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '15px';
+            iframe.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)';
+            iframe.style.opacity = '0';
+            iframe.style.transition = 'opacity 0.5s ease';
+            iframe.allowFullscreen = true;
+            iframe.loading = 'lazy';
+            iframe.referrerPolicy = 'no-referrer-when-downgrade';
+            iframe.src = mapUrl;
+            
+            iframe.onload = function() {
+                loadingIndicator.remove();
+                iframe.style.opacity = '1';
+            };
+            
+            mapContainer.appendChild(iframe);
+        }, 800);
+    }
+}
+
+// Função para animar as seções quando ficam visíveis
+function animateOnScroll() {
+    const sections = document.querySelectorAll('section');
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// Função para adicionar efeitos de hover aos botões e elementos interativos
+function setupHoverEffects() {
+    // Botões
+    const allButtons = document.querySelectorAll('.btn');
+    allButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.2)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+    });
+    
+    // Links do footer
+    const footerLinks = document.querySelectorAll('footer a');
+    footerLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+            this.style.color = '#f9d071';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.color = '';
+        });
     });
 }
 
 // Exporta as funções para uso em outros arquivos
 window.loadTours = loadTours;
-window.initMap = initMap;
+window.animateOnScroll = animateOnScroll;
+window.setupHoverEffects = setupHoverEffects;

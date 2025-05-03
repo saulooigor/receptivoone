@@ -1,223 +1,767 @@
-/* Estilos gerais */
+/* Estilos gerais - Nova paleta de cores */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap');
+
 :root {
-    --primary-color: #2e86de;
-    --secondary-color: #ff6b6b;
-    --dark-color: #2c3e50;
-    --light-color: #f5f6fa;
-    --gray-color: #dcdde1;
-    --text-color: #333333;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-color);
-    overflow-x: hidden;
-  }
-  
-  /* Estilos do Header */
-  .header-video {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  
-  .video-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
-  
-  .video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .header-content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .logo {
-    max-width: 200px;
-    margin-bottom: 30px;
-  }
-  
-  /* Estilos dos cards de pacotes */
-  .pacote-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%;
-    box-shadow: var(--shadow);
-  }
-  
-  .pacote-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  .pacote-card img {
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  /* Estilos da seção de detalhes do pacote */
-  #pacote-mapa {
-    width: 100%;
-    height: 250px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-  }
-  
-  #pacote-carousel {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  
-  .carousel-item img {
-    height: 350px;
-    object-fit: cover;
-  }
-  
-  /* Botão de WhatsApp */
-  .whatsapp-button {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    transition: transform 0.3s;
-  }
-  
-  .whatsapp-button:hover {
-    transform: scale(1.1);
-  }
-  
-  .whatsapp-button i {
-    font-size: 30px;
-  }
-  
-  .whatsapp-button a {
-    color: white;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Animações */
-  .animate-on-scroll {
+  --primary-color: #fc8c04; /* Laranja vibrante */
+  --secondary-color: #f9d071; /* Amarelo suave */
+  --accent-color: #5c0404; /* Vermelho escuro */
+  --blue-color: #5094ac; /* Azul turquesa */
+  --neutral-color: #bcaa84; /* Bege/Areia */
+  --light-color: #fff9f0; /* Branco amarelado */
+  --dark-color: #333333; /* Quase preto */
+  --text-color: #333333;
+  --shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos de texto e tipografia */
+body {
+  font-family: 'Baloo 2', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  overflow-x: hidden;
+  background-color: var(--light-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* Animações Gerais */
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(30px);
   }
-  
-  .animated {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
-  
-  /* Estilos para mobile */
-  @media (max-width: 768px) {
-    .header-content h1 {
-      font-size: 2.5rem;
-    }
-    
-    .logo {
-      max-width: 150px;
-    }
-    
-    .carousel-item img {
-      height: 250px;
-    }
-    
-    #pacote-mapa {
-      height: 200px;
-    }
-    
-    .whatsapp-button {
-      width: 50px;
-      height: 50px;
-      bottom: 20px;
-      right: 20px;
-    }
-    
-    .whatsapp-button i {
-      font-size: 24px;
-    }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes colorWave {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(15deg);
+  }
+}
+
+/* Estilos do Header */
+.header-video {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.video-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(252, 140, 4, 0.6) 0%, rgba(92, 4, 4, 0.6) 100%);
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.logo {
+  max-width: 220px;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  animation: pulse 4s infinite ease-in-out;
+}
+
+.header-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--secondary-color), white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-content p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+#header-cta {
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
+  background: var(--accent-color);
+  border: 2px solid var(--secondary-color);
+}
+
+#header-cta:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  background: var(--primary-color);
+}
+
+/* Estilos da seção de pacotes */
+#pacotes {
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, var(--light-color) 0%, white 100%);
+}
+
+#pacotes h2 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+  text-align: center;
+  text-shadow: 2px 2px 0px var(--secondary-color);
+  position: relative;
+}
+
+#pacotes h2:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 5px;
+  background: var(--accent-color);
+  margin: 15px auto;
+  border-radius: 10px;
+}
+
+/* Estilos dos cards de pacotes */
+.pacote-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  border: none;
+  box-shadow: var(--shadow);
+  background: white;
+}
+
+.pacote-card:hover {
+  transform: translateY(-15px) rotate(2deg);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+.pacote-card img {
+  height: 220px;
+  object-fit: cover;
+  transition: all 0.5s ease;
+  filter: saturate(1.2);
+}
+
+.pacote-card:hover img {
+  transform: scale(1.1);
+  filter: saturate(1.5);
+}
+
+.pacote-card .card-body {
+  padding: 1.5rem;
+  border-top: 4px solid var(--primary-color);
+}
+
+.pacote-card .card-title {
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.pacote-card .card-text {
+  color: var(--dark-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.card-body .text-primary {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.ver-pacote {
+  color: var(--blue-color);
+  border-color: var(--blue-color);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.ver-pacote:hover {
+  background-color: var(--blue-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Estilos da seção de detalhes do pacote */
+#detalhe-pacote {
+  padding: 4rem 0;
+  background-color: white;
+}
+
+#voltar-pacotes {
+  background-color: var(--neutral-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+#voltar-pacotes:hover {
+  background-color: var(--accent-color);
+  transform: translateX(-5px);
+}
+/* Estilos para o iframe do mapa */
+#pacote-mapa {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+  border: 4px solid var(--primary-color);
+  transition: all 0.4s ease;
+}
+
+#pacote-mapa:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(252, 140, 4, 0.3);
+}
+
+#pacote-mapa::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-color);
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#pacote-mapa:hover::before {
+  opacity: 0;
+}
+
+#pacote-mapa iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  filter: saturate(1.2);
+  transition: all 0.5s ease;
+}
+
+#pacote-mapa:hover iframe {
+  filter: saturate(1.5);
+}
+
+/* Indicador de carregamento do mapa */
+.map-loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(249, 208, 113, 0.3);
+  z-index: 2;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.map-loading-indicator i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+/* Decoração do mapa */
+.map-decorative-pin {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.map-decorative-pin i {
+  transform: rotate(45deg);
+  font-size: 1.4rem;
+}
+
+/* Título da seção do mapa */
+.map-section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.map-section-title i {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-right: 10px;
+}
+
+.map-section-title h4 {
+  margin: 0;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+/* Animação para o mapa */
+@keyframes mapPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(252, 140, 4, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(252, 140, 4, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(252, 140, 4, 0);
+  }
+}
+
+.map-pulse {
+  animation: mapPulse 2s infinite;
+}
+
+#pacote-carousel {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.carousel-item img, .carousel-item video {
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  background-color: rgba(252, 140, 4, 0.6);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+  left: 15px;
+}
+
+.carousel-control-next {
+  right: 15px;
+}
+
+#pacote-titulo {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0px var(--secondary-color);
+}
+
+#pacote-descricao {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Estilos das listas de itens */
+.list-group-item {
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 8px;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: translateX(5px);
+  background-color: #fff8ee;
+}
+
+.badge.bg-success {
+  background-color: var(--blue-color) !important;
+}
+
+.badge.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.pacote-valor h5 {
+  color: var(--accent-color);
+}
+
+#pacote-valor {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+#reservar-btn {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 12px rgba(252, 140, 4, 0.3);
+}
+
+#reservar-btn:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(92, 4, 4, 0.3);
+}
+
+/* Botão de WhatsApp */
+.whatsapp-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.whatsapp-button.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.whatsapp-button i {
+  font-size: 35px;
+}
+
+.whatsapp-button a {
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Animações */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+
+.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #3a0202 100%);
+  color: white;
+  padding: 4rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: var(--primary-color);
+}
+
+footer h5 {
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+footer h5::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--primary-color);
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+footer p, footer a {
+  font-size: 1.1rem;
+}
+
+.social-icons a, .pagamento-icons i {
+  margin-right: 15px;
+  transition: all 0.4s ease;
+  display: inline-block;
+}
+
+.social-icons a:hover, .pagamento-icons i:hover {
+  transform: translateY(-7px) scale(1.2);
+  color: var(--secondary-color) !important;
+}
+
+/* Links do footer */
+footer a.text-white {
+  display: block;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+footer a.text-white:hover {
+  color: var(--secondary-color) !important;
+  transform: translateX(10px);
+}
+
+/* Botões */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Ajustes para melhorar a distribuição em telas maiores */
+
+/* Para telas maiores, modificamos o layout para melhor distribuição */
+@media (min-width: 992px) {
+  /* Ajuste para a seção de detalhes do pacote - layout mais equilibrado */
+  #detalhe-pacote .container {
+    max-width: 1400px; /* Aumentamos um pouco para aproveitar melhor o espaço */
   }
   
-  /* Footer */
-  footer {
-    background-color: var(--dark-color);
+  /* Ajustamos o grid para melhorar a distribuição */
+  #detalhe-pacote .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 30px;
+    grid-template-areas: 
+      "carousel info"
+      "carousel mapa"
+      "incluso valor";
   }
   
-  .social-icons a, .pagamento-icons i {
-    margin-right: 10px;
-    transition: transform 0.3s;
+  /* Posicionando cada seção no grid */
+  #detalhe-pacote .col-lg-6:first-child {
+    grid-area: carousel;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
   }
   
-  .social-icons a:hover, .pagamento-icons i:hover {
-    transform: scale(1.2);
+  /* Área com o título e descrição */
+  .pacote-info {
+    grid-area: info;
+    width: 100%;
+    margin-bottom: 0;
   }
   
-  /* Botões */
-  .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+  /* Área do mapa */
+  .pacote-mapa-section {
+    grid-area: mapa;
+    width: 100%;
+    margin-bottom: 0;
   }
   
-  .btn-primary:hover {
-    background-color: #1c7ed6;
-    border-color: #1c7ed6;
+  /* Área do que está incluso */
+  .pacote-incluso {
+    grid-area: incluso;
+    width: 100%;
   }
   
-  .btn-outline-primary {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+  /* Área dos valores e botão de reserva */
+  .pacote-valor-section {
+    grid-area: valor;
+    width: 100%;
+    align-self: start;
   }
   
-  .btn-outline-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
+  /* Ajustes para o carrossel ocupar toda a altura disponível */
+  #pacote-carousel, 
+  #carousel-inner-container,
+  #pacote-carousel .carousel-item {
+    height: 100%;
   }
   
-  #reservar-btn {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
+  #pacote-carousel .carousel-item img,
+  #pacote-carousel .carousel-item video {
+    height: 600px; /* Altura fixa maior para o carrossel */
+    object-fit: cover;
   }
   
-  #reservar-btn:hover {
-    background-color: #ff5252;
-    border-color: #ff5252;
+  /* Melhoramos o tamanho do mapa */
+  #pacote-mapa {
+    height: 350px;
   }
+}
+
+/* Para telas muito grandes, aplicamos um layout ainda melhor */
+@media (min-width: 1400px) {
+  #detalhe-pacote .row {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+  
+  #pacote-carousel .carousel-item img,
+  #pacote-carousel .carousel-item video {
+    height: 700px; /* Altura ainda maior para telas muito grandes */
+  }
+}
+
+/* Estilo para as novas classes de divisão do conteúdo */
+.pacote-info, 
+.pacote-mapa-section, 
+.pacote-incluso, 
+.pacote-valor-section {
+  margin-bottom: 30px;
+}
+
+/* Dando mais destaque ao título */
+#pacote-titulo {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Tornando a lista de itens mais visível */
+#pacote-itens {
+  margin-top: 15px;
+}
+
+/* Estilos para mobile */
+@media (max-width: 768px) {
+  .header-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .logo {
+    max-width: 150px;
+  }
+  
+  .carousel-item img, .carousel-item video {
+    height: 250px;
+  }
+  
+  #pacote-mapa {
+    height: 200px;
+  }
+  
+  #pacotes h2 {
+    font-size: 2.2rem;
+  }
+  
+  #pacote-titulo {
+    font-size: 2rem;
+  }
+  
+  .pacote-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  
+  .whatsapp-button {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-button i {
+    font-size: 28px;
+  }
+}
