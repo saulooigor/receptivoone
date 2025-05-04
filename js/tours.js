@@ -173,17 +173,46 @@ function showTourDetails(tourId) {
     });
     
     // Adiciona vídeos ao carrossel, se existirem
+    // Verifica se é um dispositivo móvel
+    const isMobile = window.innerWidth <= 768;
+
+    // Adiciona vídeos ao carrossel, se existirem
     if (tour.videos && tour.videos.length > 0) {
         tour.videos.forEach(video => {
             const item = document.createElement('div');
             item.className = 'carousel-item';
+
+            // Configura o vídeo sem autoplay para dispositivos móveis
+            const autoplayAttr = isMobile ? '' : 'autoplay';
+
             item.innerHTML = `
-                <video class="d-block w-100" controls autoplay muted loop>
+                <video class="d-block w-100" controls ${autoplayAttr} muted loop>
                     <source src="assets/videos/${video}" type="video/mp4">
                     Seu navegador não suporta vídeos HTML5.
                 </video>
+                ${isMobile ? '<div class="video-play-indicator"><i class="fas fa-play-circle"></i><p>Toque para reproduzir</p></div>' : ''}
             `;
             carouselInner.appendChild(item);
+
+            // Adiciona evento de clique para reproduzir o vídeo em dispositivos móveis
+            if (isMobile) {
+                const videoEl = item.querySelector('video');
+                const playIndicator = item.querySelector('.video-play-indicator');
+
+                item.addEventListener('click', function() {
+                    if (videoEl.paused) {
+                        videoEl.play();
+                        if (playIndicator) {
+                            playIndicator.style.opacity = '0';
+                        }
+                    } else {
+                        videoEl.pause();
+                        if (playIndicator) {
+                            playIndicator.style.opacity = '1';
+                        }
+                    }
+                });
+            }
         });
     }
     
@@ -236,12 +265,6 @@ function showTourDetails(tourId) {
             const carousel = new bootstrap.Carousel(document.getElementById('pacote-carousel'), {
                 interval: 3000,
                 touch: true
-            });
-            
-            // Fazer scroll para o topo da página com animação suave
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
             });
         }, 100);
         
