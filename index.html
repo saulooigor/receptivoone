@@ -61,14 +61,15 @@
 
     <!-- Seção de detalhe do pacote selecionado -->
     <section id="detalhe-pacote" class="py-5 d-none">
-        <div class="container">
+        <div class="container-fluid">
             <button id="voltar-pacotes" class="btn mb-4">
                 <i class="fas fa-arrow-left"></i> Voltar para passeios
             </button>
-
-            <div class="row">
-                <!-- Carrossel de imagens mantido no lado esquerdo -->
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
+    
+            <!-- Nova estrutura usando grid para melhor distribuição -->
+            <div class="pacote-grid">
+                <!-- Carrossel de imagens -->
+                <div class="pacote-carousel-wrapper" data-aos="fade-right">
                     <div id="pacote-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" id="carousel-inner-container">
                             <!-- Imagens carregadas dinamicamente -->
@@ -83,60 +84,56 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Coluna direita reorganizada em blocos com classes específicas -->
-                <div class="col-lg-6" data-aos="fade-left">
-                    <!-- Bloco de informações básicas -->
-                    <div class="pacote-info">
-                        <h3 id="pacote-titulo">Nome do Passeio</h3>
-                        <p id="pacote-descricao">Descrição do passeio...</p>
+    
+                <!-- Bloco de informações básicas -->
+                <div class="pacote-info" data-aos="fade-up">
+                    <h3 id="pacote-titulo">Nome do Passeio</h3>
+                    <p id="pacote-descricao">Descrição do passeio...</p>
+                </div>
+    
+                <!-- Bloco do mapa -->
+                <div class="pacote-mapa-section" data-aos="fade-left">
+                    <div class="map-section-title">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h4>Localização do Passeio</h4>
                     </div>
-
-                    <!-- Bloco do mapa -->
-                    <div class="pacote-mapa-section">
-                        <div class="map-section-title">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <h4>Localização do Passeio</h4>
+                    <div id="pacote-mapa" class="map-pulse">
+                        <!-- Elemento decorativo -->
+                        <div class="map-decorative-pin">
+                            <i class="fas fa-map-pin"></i>
                         </div>
-                        <div id="pacote-mapa" class="map-pulse">
-                            <!-- Elemento decorativo -->
-                            <div class="map-decorative-pin">
-                                <i class="fas fa-map-pin"></i>
-                            </div>
-                            <!-- O iframe será inserido aqui via JavaScript -->
-                            <div class="map-loading-indicator">
-                                <i class="fas fa-map-marked-alt fa-spin"></i>
-                                <p>Carregando mapa interativo...</p>
-                            </div>
+                        <!-- O iframe será inserido aqui via JavaScript -->
+                        <div class="map-loading-indicator">
+                            <i class="fas fa-map-marked-alt fa-spin"></i>
+                            <p>Carregando mapa interativo...</p>
                         </div>
-                        <p class="text-center small text-muted">
-                            <i class="fas fa-info-circle me-1"></i> Clique no mapa para ver detalhes e rotas
-                        </p>
                     </div>
-
-                    <!-- Bloco do que está incluso -->
-                    <div class="pacote-incluso">
-                        <h4>O que está incluso</h4>
-                        <ul id="pacote-itens" class="list-group">
-                            <!-- Itens carregados dinamicamente -->
-                        </ul>
-                    </div>
-
-                    <!-- Bloco do valor e reserva -->
-                    <div class="pacote-valor-section">
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="pacote-valor">
-                                <h5>Valor a partir de:</h5>
-                                <p id="pacote-valor" class="fs-4">R$ 0,00</p>
-                            </div>
-                            <a href="#" id="reservar-btn" class="btn btn-lg">Reservar Agora</a>
+                    <p class="text-center small text-muted">
+                        <i class="fas fa-info-circle me-1"></i> Clique no mapa para ver detalhes e rotas
+                    </p>
+                </div>
+    
+                <!-- Bloco do que está incluso -->
+                <div class="pacote-incluso" data-aos="fade-right" data-aos-delay="200">
+                    <h4>O que está incluso</h4>
+                    <ul id="pacote-itens" class="list-group">
+                        <!-- Itens carregados dinamicamente -->
+                    </ul>
+                </div>
+    
+                <!-- Bloco do valor e reserva -->
+                <div class="pacote-valor-section" data-aos="fade-up" data-aos-delay="300">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="pacote-valor">
+                            <h5>Valor a partir de:</h5>
+                            <p id="pacote-valor" class="fs-4">R$ 0,00</p>
                         </div>
+                        <a href="#" id="reservar-btn" class="btn btn-lg">Reservar Agora</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="py-4">
         <div class="container">

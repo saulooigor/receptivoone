@@ -72,7 +72,7 @@ function setupCTAButton() {
 function setupWhatsAppButton() {
     const whatsappButton = document.getElementById('whatsapp-button');
     if (whatsappButton) {
-        const phoneNumber = '5500000000000'; // Número da empresa
+        const phoneNumber = '31975157421'; // Número da empresa
         const whatsappLink = whatsappButton.querySelector('a');
         
         if (whatsappLink) {

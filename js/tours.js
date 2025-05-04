@@ -134,7 +134,7 @@ function setupTourEvents() {
         reservarBtn.addEventListener('click', function() {
             const pacoteNome = document.getElementById('pacote-titulo').textContent;
             const mensagem = `Olá! Estou interessado no pacote "${pacoteNome}". Gostaria de mais informações e disponibilidade.`;
-            const phoneNumber = '5500000000000'; // Substitua pelo número real da empresa
+            const phoneNumber = '31975157421'; // Substitua pelo número real da empresa
             
             // Efeito de clique
             this.classList.add('animate__animated', 'animate__rubberBand');
@@ -215,9 +215,6 @@ function showTourDetails(tourId) {
     // Atualiza o iframe do mapa com a localização específica do passeio
     updateMapIframe(tour.localizacao);
     
-    // Aplica classes adicionais para o layout responsivo
-    applyResponsiveLayout();
-    
     // Esconde a seção de pacotes com fade out
     document.getElementById('pacotes').style.opacity = 0;
     document.getElementById('pacotes').style.transform = 'translateY(20px)';
@@ -240,64 +237,15 @@ function showTourDetails(tourId) {
                 interval: 3000,
                 touch: true
             });
+            
+            // Fazer scroll para o topo da página com animação suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }, 100);
         
     }, 300);
-}
-
-// Nova função para aplicar layouts responsivos adicionais
-function applyResponsiveLayout() {
-    // Verifica o tamanho da tela
-    const isLargeScreen = window.innerWidth >= 992;
-    
-    // Para telas grandes, aplicamos o layout grid
-    if (isLargeScreen) {
-        // Garantir que as classes de grid estejam aplicadas corretamente
-        const detailContainer = document.querySelector('#detalhe-pacote .container');
-        if (detailContainer) {
-            detailContainer.classList.add('large-screen-layout');
-        }
-    }
-    
-    // Ajusta altura do carrossel em telas grandes
-    adjustCarouselHeight();
-    
-    // Adiciona listener para ajustar quando a janela for redimensionada
-    window.addEventListener('resize', adjustCarouselHeight);
-}
-
-// Função para ajustar altura do carrossel
-function adjustCarouselHeight() {
-    const carousel = document.getElementById('pacote-carousel');
-    if (!carousel) return;
-    
-    const isLargeScreen = window.innerWidth >= 992;
-    
-    if (isLargeScreen) {
-        // Calcula altura baseada na altura da coluna de informações
-        const infoColumn = document.querySelector('.pacote-info');
-        const mapSection = document.querySelector('.pacote-mapa-section');
-        
-        if (infoColumn && mapSection) {
-            // Obtém altura combinada para determinar a altura do carrossel
-            const combinedHeight = infoColumn.offsetHeight + mapSection.offsetHeight + 30; // 30px para o gap
-            
-            // Aplica altura mínima - não menos que 500px
-            const carouselHeight = Math.max(combinedHeight, 500); 
-            
-            // Aplica ao carrossel e seus elementos internos
-            const carouselInner = carousel.querySelector('.carousel-inner');
-            if (carouselInner) {
-                carouselInner.style.height = `${carouselHeight}px`;
-            }
-        }
-    } else {
-        // Em telas menores, remove altura fixa
-        const carouselInner = carousel.querySelector('.carousel-inner');
-        if (carouselInner) {
-            carouselInner.style.height = '';
-        }
-    }
 }
 
 // Função para atualizar o iframe do Google Maps
@@ -306,7 +254,7 @@ function updateMapIframe(localizacao) {
     if (mapContainer) {
         // Define uma URL com as coordenadas para um iframe do Google Maps
         // Coordenadas podem ser usadas diretamente em uma URL do Google Maps
-        const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${localizacao.lng}!3d${localizacao.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDA3JzM0LjQiUyA0M8KwMzknMTUuNiJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr`;
+        const mapUrl = `https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3751.1018139985167!2d-44.134144924801205!3d-19.920113938000632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1spt-BR!2sbr!4v1746382491345!5m2!1spt-BR!2sbr`;
         
         // Cria o iframe com animação
         mapContainer.innerHTML = '';

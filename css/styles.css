@@ -237,9 +237,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Estilos da seção de detalhes do pacote */
-#detalhe-pacote {
-  padding: 4rem 0;
-  background-color: white;
+
+
+#detalhe-pacote .container-fluid {
+  padding: 0 30px;
 }
 
 #voltar-pacotes {
@@ -619,109 +620,116 @@ footer a.text-white:hover {
 }
 
 /* Ajustes para melhorar a distribuição em telas maiores */
-
-/* Para telas maiores, modificamos o layout para melhor distribuição */
 @media (min-width: 992px) {
-  /* Ajuste para a seção de detalhes do pacote - layout mais equilibrado */
-  #detalhe-pacote .container {
-    max-width: 1400px; /* Aumentamos um pouco para aproveitar melhor o espaço */
-  }
-  
-  /* Ajustamos o grid para melhorar a distribuição */
-  #detalhe-pacote .row {
+  /* Usamos CSS Grid para uma distribuição mais flexível e eficiente */
+  #detalhe-pacote .pacote-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr; /* Três colunas de tamanho igual */
+    grid-template-rows: auto auto;
+    gap: 25px;
     grid-template-areas: 
-      "carousel info"
-      "carousel mapa"
-      "incluso valor";
+      "carousel info mapa"
+      "carousel incluso valor";
   }
   
-  /* Posicionando cada seção no grid */
-  #detalhe-pacote .col-lg-6:first-child {
+  /* Definimos as áreas do grid para cada componente */
+  .pacote-carousel-wrapper {
     grid-area: carousel;
-    width: 100%;
-    max-width: 100%;
-    padding-right: 0;
   }
   
-  /* Área com o título e descrição */
   .pacote-info {
     grid-area: info;
-    width: 100%;
-    margin-bottom: 0;
   }
   
-  /* Área do mapa */
   .pacote-mapa-section {
     grid-area: mapa;
-    width: 100%;
-    margin-bottom: 0;
   }
   
-  /* Área do que está incluso */
   .pacote-incluso {
     grid-area: incluso;
-    width: 100%;
   }
   
-  /* Área dos valores e botão de reserva */
   .pacote-valor-section {
     grid-area: valor;
-    width: 100%;
     align-self: start;
   }
   
-  /* Ajustes para o carrossel ocupar toda a altura disponível */
-  #pacote-carousel, 
-  #carousel-inner-container,
+  /* Ajustes para o tamanho do carrossel */
+  #pacote-carousel {
+    height: 100%;
+    max-height: 600px;
+  }
+  
+  #pacote-carousel .carousel-inner, 
   #pacote-carousel .carousel-item {
     height: 100%;
   }
   
   #pacote-carousel .carousel-item img,
   #pacote-carousel .carousel-item video {
-    height: 600px; /* Altura fixa maior para o carrossel */
+    height: 100%;
     object-fit: cover;
   }
-  
-  /* Melhoramos o tamanho do mapa */
-  #pacote-mapa {
-    height: 350px;
-  }
 }
 
-/* Para telas muito grandes, aplicamos um layout ainda melhor */
+/* Para telas ainda maiores, ajustamos as proporções do grid */
 @media (min-width: 1400px) {
-  #detalhe-pacote .row {
-    grid-template-columns: 1.2fr 0.8fr;
+  #detalhe-pacote .pacote-grid {
+    grid-template-columns: 1.2fr 0.9fr 0.9fr; /* Carrossel ligeiramente maior */
   }
   
-  #pacote-carousel .carousel-item img,
-  #pacote-carousel .carousel-item video {
-    height: 700px; /* Altura ainda maior para telas muito grandes */
+  /* Aumentamos um pouco mais a altura máxima do carrossel */
+  #pacote-carousel {
+    max-height: 650px;
   }
 }
 
-/* Estilo para as novas classes de divisão do conteúdo */
+/* Para telas extra grandes, limitamos a altura do carrossel */
+@media (min-width: 1800px) {
+  #detalhe-pacote .container-fluid {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  
+  #pacote-carousel {
+    max-height: 700px;
+  }
+}
+
+/* Ajustes estéticos para cada componente */
 .pacote-info, 
 .pacote-mapa-section, 
 .pacote-incluso, 
 .pacote-valor-section {
-  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  height: 100%;
 }
 
-/* Dando mais destaque ao título */
 #pacote-titulo {
   margin-top: 0;
-  margin-bottom: 20px;
+  color: var(--primary-color);
 }
 
-/* Tornando a lista de itens mais visível */
-#pacote-itens {
-  margin-top: 15px;
+/* Garantir que o mapa tenha altura adequada */
+#pacote-mapa {
+  height: 250px;
+}
+
+/* Adaptações para telas menores */
+@media (max-width: 991px) {
+  .pacote-info, 
+  .pacote-mapa-section, 
+  .pacote-incluso, 
+  .pacote-valor-section {
+    margin-bottom: 25px;
+  }
+  
+  #pacote-carousel {
+    margin-bottom: 25px;
+  }
 }
 
 /* Estilos para mobile */
@@ -763,5 +771,242 @@ footer a.text-white:hover {
   
   .whatsapp-button i {
     font-size: 28px;
+  }
+}
+
+/* Melhorias estéticas para o novo layout */
+
+/* Estilizações para os blocos de conteúdo */
+.pacote-info, 
+.pacote-mapa-section, 
+.pacote-incluso, 
+.pacote-valor-section {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Adiciona um efeito de borda superior colorida para cada bloco */
+.pacote-info::before, 
+.pacote-mapa-section::before, 
+.pacote-incluso::before, 
+.pacote-valor-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+/* Efeitos de hover para os blocos */
+.pacote-info:hover, 
+.pacote-mapa-section:hover, 
+.pacote-incluso:hover, 
+.pacote-valor-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Melhorias para o carrossel */
+#pacote-carousel {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+/* Gradiente sobre as imagens do carrossel para melhorar legibilidade de controles */
+#pacote-carousel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Estiliza os controles do carrossel */
+.carousel-control-prev, .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(252, 140, 4, 0.7);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  opacity: 1;
+  background-color: var(--primary-color);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Posiciona os controles melhor */
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+/* Estilizações adicionais para o mapa */
+#pacote-mapa {
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#pacote-mapa:hover {
+  transform: scale(1.02);
+}
+
+/* Estilização específica para a lista de itens inclusos */
+#pacote-itens .list-group-item {
+  border-radius: 10px !important;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-left: 4px solid var(--primary-color);
+}
+
+#pacote-itens .list-group-item:hover {
+  transform: translateX(10px);
+  background-color: #fff8ee;
+}
+
+/* Estilização para o botão Reservar */
+#reservar-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 12px rgba(252, 140, 4, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+#reservar-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+#reservar-btn:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(92, 4, 4, 0.3);
+}
+
+#reservar-btn:hover::before {
+  left: 100%;
+}
+
+/* Estilização para títulos dentro dos blocos */
+.pacote-info h3, 
+.pacote-mapa-section h4, 
+.pacote-incluso h4, 
+.pacote-valor-section h5 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.pacote-info h3::after, 
+.pacote-mapa-section h4::after, 
+.pacote-incluso h4::after, 
+.pacote-valor-section h5::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.pacote-info:hover h3::after, 
+.pacote-mapa-section:hover h4::after, 
+.pacote-incluso:hover h4::after, 
+.pacote-valor-section:hover h5::after {
+  width: 60px;
+}
+
+/* Personalização para os badges */
+.badge {
+  padding: 6px 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.badge.bg-success {
+  background-color: var(--blue-color) !important;
+}
+
+.badge.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+/* Estilização do botão voltar */
+#voltar-pacotes {
+  background-color: var(--neutral-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#voltar-pacotes:hover {
+  background-color: var(--accent-color);
+  transform: translateX(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Melhorias para telas móveis */
+@media (max-width: 991px) {
+  /* Espaçamento e margens para melhor visualização em mobile */
+  #detalhe-pacote .container-fluid {
+    padding: 0 15px;
+  }
+  
+  .pacote-info, 
+  .pacote-mapa-section, 
+  .pacote-incluso, 
+  .pacote-valor-section {
+    margin-bottom: 25px;
+    padding: 15px;
+  }
+  
+  /* Ajusta altura do carrossel em mobile */
+  #pacote-carousel .carousel-item img,
+  #pacote-carousel .carousel-item video {
+    height: 300px;
+  }
+  
+  /* Reduz tamanho do mapa em mobile */
+  #pacote-mapa {
+    height: 200px;
   }
 }

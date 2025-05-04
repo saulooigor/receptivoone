@@ -6,8 +6,8 @@
       "imagens": ["praia1.jpg", "praia2.jpg", "praia3.jpg"],
       "videos": ["praia-tour.mp4"],
       "localizacao": {
-        "lat": -23.123456,
-        "lng": -43.654321,
+        "lat": -44.134144924801205,
+        "lng": -19.920113938000632,
         "endereco": "Praias do Litoral Norte"
       },
       "incluso": [
